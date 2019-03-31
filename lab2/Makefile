@@ -23,7 +23,7 @@ CPP	=gcc-3.4 -E -nostdinc -I../include
 .c.o:
 	$(CC) $(CFLAGS) \
 	-c -o $*.o $<
-
+#这里需要修改添加who.o
 OBJS  = sched.o system_call.o traps.o asm.o fork.o \
 	panic.o printk.o vsprintf.o sys.o exit.o \
 	signal.o mktime.o who.o
@@ -47,7 +47,7 @@ dep:
 	(cd chr_drv; make dep)
 	(cd blk_drv; make dep)
 
-### Dependencies:
+### Dependencies:  #这里需要修改，添加who.c的依赖
 who.s who.o: who.c ../include/linux/kernel.h ../include/unistd.h
 exit.s exit.o: exit.c ../include/errno.h ../include/signal.h \
   ../include/sys/types.h ../include/sys/wait.h ../include/linux/sched.h \
