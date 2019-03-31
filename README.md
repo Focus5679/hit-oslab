@@ -8,3 +8,5 @@ https://github.com/hoverwinter/HIT-OSLab
 
 另课程资源：
 https://study.163.com/series/1202806603.htm
+oslab实验环境搭建
+https://blog.csdn.net/qq_40758751/article/details/88707214
