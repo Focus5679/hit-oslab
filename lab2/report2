@@ -1,1 +1,22 @@
-1
+系统调用的过程
+1.调用库函数
+2.库函数展开成包含int 0x80中断的diamagnetic，然后执行中断处理函数system_call
+3.调用内核函数
+添加系统调用步骤
+1.修改/linux-0.11/include/unistd.h文件，对新增的系统调用增加宏定义。
+（参考unistd.h文件）
+2.修改/linux-0.11/include/linux/sys.h文件，增加系统调用函数并添加到系统调用表中。
+（参考sys.h文件）
+3.修改/linux-0.11/kernel/system_call.s文件，修改系统调用总数
+（参考system_call.s文件）
+4.编写who.c文件，实现系统调用功能，该文件放在/linux-0.11/kernel目录中
+（参考who.c文件）
+5.修改Makefile，使who.c能随内核一起编译，该文件在/linux-0.11/kernel目录中
+（参考Makefile文件）
+6.编译内核，需要注意的是有可能会因为已经编译过导致不重新编译，此时可以先执行
+make clean    #清理上一次编译产生的文件
+make all      #重新编译内核
+7.编写在linux-0.11上运行的应用程序whoami.c和iam.c，并将其拷贝到hdc文件系统里。注意编写时研究一下为什么一定要用get_fs_byte()和put_fs_byte()。
+8.在linux-0.11上编译运行两个文件会提示报错，这是因为需要将文件系统的文件替换成我们前面修改好的。
+将文件"/linux-0.11/include/unistd.h"复制到路径"/hdc/usr/include"下；然后将文件"/linux-0.11/include/linux/sys.h"复制到路径"/hdc/usr/include/linux"下。
+9.在linux-0.11上运行上述程序，不出意外应该可以成功。
